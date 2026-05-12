@@ -84,6 +84,15 @@ func (g *Game) Update() error {
 		g.updatePlaying()
 
 	case StateLevelUp:
+		// Keep particles ticking so explosions finish animating between levels.
+		aliveP := g.particles[:0]
+		for i := range g.particles {
+			g.particles[i].Update()
+			if g.particles[i].Life > 0 {
+				aliveP = append(aliveP, g.particles[i])
+			}
+		}
+		g.particles = aliveP
 		g.lvlTimer--
 		if g.lvlTimer <= 0 {
 			g.level++

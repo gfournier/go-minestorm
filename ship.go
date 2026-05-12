@@ -61,6 +61,7 @@ func (s *Ship) Update() {
 	}
 	s.Vel = s.Vel.Scale(ShipFriction)
 	s.Pos = wrapPos(s.Pos.Add(s.Vel), ScreenWidth, ScreenHeight)
+	s.Angle = math.Mod(s.Angle, 2*math.Pi)
 }
 
 // Hyperspace teleports the ship to a random position with brief invincibility.

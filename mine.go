@@ -17,7 +17,6 @@ const (
 
 var (
 	mineRadii     = [3]float64{22, 13, 7}
-	mineScales    = [3]float64{22, 13, 7}
 	minePoints    = [3]int{10, 20, 40}
 	mineMaxSpeeds = [3]float64{2.0, 3.2, 4.8}
 )
@@ -73,6 +72,6 @@ func (m *Mine) Update(shipPos Vec2, trackStr float64) {
 func (m *Mine) Radius() float64 { return mineRadii[m.Size] }
 
 func (m *Mine) Draw(screen *ebiten.Image) {
-	pts := transformPoints(getMineShape(m.Size), m.Pos, m.Angle, mineScales[m.Size])
+	pts := transformPoints(getMineShape(m.Size), m.Pos, m.Angle, mineRadii[m.Size])
 	drawPoly(screen, pts, mineColor(m.Size))
 }

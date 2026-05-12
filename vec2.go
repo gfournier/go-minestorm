@@ -18,16 +18,13 @@ func (v Vec2) Norm() Vec2 {
 }
 
 func wrapPos(pos Vec2, w, h float64) Vec2 {
-	x, y := pos.X, pos.Y
+	x := math.Mod(pos.X, w)
 	if x < 0 {
 		x += w
-	} else if x >= w {
-		x -= w
 	}
+	y := math.Mod(pos.Y, h)
 	if y < 0 {
 		y += h
-	} else if y >= h {
-		y -= h
 	}
 	return Vec2{x, y}
 }
